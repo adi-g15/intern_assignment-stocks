@@ -1,0 +1,9 @@
+{
+  "name": "tmp",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/adi-g15/tmp.git",
+  "author": "adi-g15 <adityag.ug19.cs@nitp.ac.in>",
+  "license": "MIT",
+  "private": true
+}
