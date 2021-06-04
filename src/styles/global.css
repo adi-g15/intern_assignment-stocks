@@ -1,4 +1,27 @@
+* {
+    margin: 0;
+    padding: 0;
+    color: whitesmoke
+}
+
 body {
-    background: brown no-repeat fixed center url("../assets/bg2.jpg");
+    background: no-repeat fixed center url("../assets/bg.jpg");
     background-size: cover;
+}
+
+.logo {
+    align-self: center;
+}
+
+.appbar {
+    position: relative ;
+}
+
+.appbar_cont {
+    display: flex ;
+    justify-content: space-between ;
+}
+
+.see_chart {
+    
 }
