@@ -1,0 +1,4 @@
+body {
+    background: brown no-repeat fixed center url("../assets/bg2.jpg");
+    background-size: cover;
+}
