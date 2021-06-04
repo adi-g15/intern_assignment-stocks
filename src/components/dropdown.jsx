@@ -5,43 +5,63 @@ import {
     Select,
     MenuItem,
     InputLabel,
-    FormControl
+    FormControl,
+    TextField
 } from "@material-ui/core";
+import {
+    Autocomplete
+} from "@material-ui/lab";
 
 // The value chosen will be made available to parent through redux
-function DropDown({dropdown_list,style={}}) {
-    const [selected, setSelected] = useState("");
-    const [age, setAge] = React.useState("");
+function DropDown({selected="", setSelected, dropdown_list,style={}}) {
+    const [options_array, setOptionsArray] = useState([]);
 
-  const handleChange = (event) => {
-    setAge(event.target.value);
+    const handleChange = (event) => {
+    setSelected(event.target.value);
   };
 
-    return (
-            <Select
-            id="stock-select"
-            fullWidth
-            value={selected}
-            defaultValue=""
-            onChange={handleChange}
-            displayEmpty
-            TransitionComponent={Fade}
-            className="dropbox"
-            style={{color: "whitesmoke", width: "40%", ...style}}
-            >
-                <MenuItem style={{color: "black"}} value="Loading..." disabled><em style={{color: "black"}} >Loading...</em></MenuItem>
-                {
-                    dropdown_list.map((val,i) => (
-                        <MenuItem value={val} key={i} style={{color: "black"}}>
-                            {val}
-                        </MenuItem>)
-                    )
-                }
-            </Select>
-    );
+  return (<Autocomplete
+        freeSolo
+        id="stock-select"
+        fullWidth
+        value={selected}
+        disableClearable
+        TransitionComponent={Fade}
+        className="dropbox"
+        style={{color: "whitesmoke", width: "40%", ...style}}
+        options={options_array.map((option) => option.title)}
+        renderInput={(params) => (
+          <TextField
+            {...params}
+            label="Search input"
+            margin="normal"
+            variant="outlined"
+            InputProps={{ ...params.InputProps, type: "search" }}
+          />
+        )}
+      />);
+
+    // return (
+    //         <Select
+    //         defaultValue=""
+    //         onChange={handleChange}
+    //         displayEmpty
+    //         >
+    //             <MenuItem style={{color: "black"}} value="Loading..." disabled><em style={{color: "black"}} >Loading...</em></MenuItem>
+    //             {
+    //                 dropdown_list.map((val,i) => (
+    //                     <MenuItem value={val} key={i} style={{color: "black"}}>
+    //                         {val}
+    //                     </MenuItem>)
+    //                 )
+    //             }
+    //         </Select>
+    // );
 }
 
 DropDown.propTypes = {
+    selected: PropTypes.string,
+    setSelected: PropTypes.func,
     dropdown_list: PropTypes.arrayOf(PropTypes.string),
     style: PropTypes.object
 };

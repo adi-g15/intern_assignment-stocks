@@ -22,6 +22,11 @@ body {
     justify-content: space-between ;
 }
 
-.see_chart {
-    
+#container {
+	max-height: 800px;
+    min-height: 75vh;
+}
+
+.chart {
+    cursor: crosshair;
 }

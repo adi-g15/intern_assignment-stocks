@@ -34,6 +34,8 @@ On type, box option changes with setState
 
 *[x] Switching
 
+*[ ] API connection
+
 *[ ] Redux connection
 
 *[ ] Graphs
