@@ -19,10 +19,10 @@ export default function App() {
     return (
             <BrowserRouter>
                 <Header tabNum={tabNum} setTabNum={setTabNum} />
-                    <Switch>
-                        <Route exact path="/" component={() => <SeeChartComponent/>} />
-                        <Route exact path="/compare" component={() => <CompareComponent/>} />
-                    </Switch>
+                <Switch>
+                    <Route exact path="/" component={() => <SeeChartComponent/>} />
+                    <Route exact path="/compare" component={() => <CompareComponent/>} />
+                </Switch>
             </BrowserRouter>
     );
 }
