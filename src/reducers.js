@@ -1,10 +1,6 @@
 import { combineReducers } from "redux";
 import { CLEAR_SYMBOLS, SET_SYMBOLS } from "./actions";
 
-function DropDownReducer(state = [], action) {
-
-}
-
 function SymbolReducer(state = [], action) {
     const {type, payload} = action;
 

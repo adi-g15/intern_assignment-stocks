@@ -4,6 +4,7 @@ import {
     FormControl,
     Container
 } from "@material-ui/core";
+import { get_intraday_data } from "../services/alphavantage";
 import Highcharts from "highcharts/highstock";
 import "highcharts/themes/dark-unica";
 
@@ -11,18 +12,10 @@ export default function SeeChart() {
     const [chartData, setChartData] = useState([]);
 
     const symbolName = "";  // not as hook state; doesn't directly affect re rendering of any component
-    const API_KEY = process.env.REACT_APP_ALPHA_API_KEY;// || "demo";
 
     function setStockSymbol(symbol) {
-        symbol = symbol.trim();
-        console.log("Symbol is: ", symbol);
-        fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=5min&apikey=${API_KEY}`)
-            .then(res => res.json())
+        get_intraday_data(symbol)
             .then(data => {
-                console.log("Received: ", data);
-                if (data["Error Message"]) {
-                    throw new Error(JSON.stringify(data));
-                }
                 const time_zone = data["Meta Data"] ? data["Meta Data"]["Time Zone"] : "UTC";
                 let timezone_offset = time_zone === "US/Eastern" ? 300 : 0;
 
@@ -37,7 +30,6 @@ export default function SeeChart() {
                     ]);
                 }
 
-                symbol_name = symbol;
                 setChartData(
                     new_data.map(pair => ({
                         date: pair[0],    // date
@@ -64,6 +56,9 @@ export default function SeeChart() {
             volume.push([obj.date, obj.volume]);
         });
 
+        ohlc.sort((a,b) => a[0] - b[0]);
+        volume.sort((a,b) => a[0] - b[0]);
+
         Highcharts.color("dark-unica");
         Highcharts.stockChart("container", {
             yAxis: [
@@ -83,10 +78,8 @@ export default function SeeChart() {
                 borderWidth: 0,
                 // leave same as HighCharts docs
                 positioner: function (width, _height, point) {
-                    const chart = this.chart, position;
-
-                    if (point.isHeader) {
-                        position = {
+                    const chart = this.chart;
+                    return point.isHeader ? {
                             x: Math.max(
                                 chart.plotLeft,
                                 Math.min(
@@ -95,14 +88,10 @@ export default function SeeChart() {
                                 )
                             ),
                             y: point.plotY
-                        };
-                    } else {
-                        position = {
+                        }: {
                             x: point.series.chart.plotLeft,
                             y: point.series.yAxis.top - chart.plotTop
                         };
-                    }
-                    return position;
                 }
             },
             series: [{
@@ -138,9 +127,11 @@ export default function SeeChart() {
                 {/* <InputLabel htmlFor="stock-select" style={{ position: "relative", color: "whitesmoke" }}>Select Stock</InputLabel> */}
                 <DropDown setStockSymbol={setStockSymbol} />
             </FormControl>
+            <div  className="chart_container">
             <Container>
                 <div id="container" className="chart"></div>
             </Container>
+            </div>
         </div>
     );
 }
