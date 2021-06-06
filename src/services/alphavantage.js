@@ -1,4 +1,5 @@
-const API_KEY = process.env.REACT_APP_ALPHA_API_KEY;            // || "demo";
+// eslint-disable-next-line no-undef
+const API_KEY = process.env.REACT_APP_ALPHA_API_KEY;
 
 /**
  * For simple abstraction, so that I can move between Polygon IO api or alphavantage api

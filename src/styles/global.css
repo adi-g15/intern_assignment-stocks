@@ -7,7 +7,6 @@
 body {
     min-height: 100vh;
     background: linear-gradient(#3f51b5, white);
-    /* background: no-repeat fixed center url("../assets/bg2.jpg"); */
     /* background: no-repeat fixed center url("../assets/bg.jpg"); */
     background-size: cover;
 }
@@ -37,7 +36,6 @@ body {
 .chart_container {
     padding-left: 24px;
     padding-right: 24px;
-    width: 100%;
     display: block;
     box-sizing: border-box;
     margin-left: auto;

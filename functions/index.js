@@ -1,6 +1,8 @@
+// eslint-disable-next-line no-undef
 const fetch = require("node-fetch");
 
-exports.handler = async (event, context) => {
+// eslint-disable-next-line
+exports.handler = async (event, _context) => {
     if (event.path === "/") {
         return {
             statusCode: 404
@@ -13,20 +15,20 @@ exports.handler = async (event, context) => {
     console.log("Calling...", api_url);
 
     try {
-        const res = await fetch(api_url)
+        const res = await fetch(api_url);
 
         return {
             statusCode: 200,
             body: await res.text()
-        }
+        };
     } catch (err) {
         console.error(err);
         return {
             statusCode: 304,
             body: "{}"
-        }
+        };
     }
-}
+};
 
     // "Access-Control-Allow-Origin", "*";
     // "Access-Control-Allow-Headers", "X-Requested-With";
