@@ -14,10 +14,9 @@ export default function Compare() {
     function changeStock(stock_opt, new_symbol) {
         get_global_quote(new_symbol)
             .then(data => {
-                console.log("Data was ", data);
                 switch (stock_opt) {
-                    case "A": setStock_A_Data(data); console.debug("A changed to ", data); break;
-                    case "B": setStock_B_Data(data); console.debug("B changed to ", data); break;
+                    case "A": setStock_A_Data(data); break;
+                    case "B": setStock_B_Data(data); break;
                     default: console.error("Wrong stock_opt passed to changeStock !");
                 }
             })

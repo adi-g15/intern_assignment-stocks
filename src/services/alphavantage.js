@@ -1,5 +1,4 @@
 const API_KEY = process.env.REACT_APP_ALPHA_API_KEY;            // || "demo";
-const SECONDARY_API_KEY = process.env.REACT_APP_SECONDARY_ALPHA_KEY;  // || "demo";
 
 /**
  * For simple abstraction, so that I can move between Polygon IO api or alphavantage api
@@ -17,7 +16,7 @@ export async function get_intraday_data(symbol_name) {    // 5 min by default
 
     if (data["Note"]) {  // Call limit reached, RETRY
         console.debug("Retrying...");
-        const res = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol_name/*.substr(symbol_name.indexOf(".")+1)*/}&interval=5min&apikey=${SECONDARY_API_KEY}`);
+        const res = await fetch(`https://secondaryalphavantage.herokuapp.com/query?function=TIME_SERIES_INTRADAY&symbol=${symbol_name/*.substr(symbol_name.indexOf(".")+1)*/}&interval=5min`);
         data = await res.json();
     }
     if (data["Error Message"])
@@ -40,7 +39,7 @@ export async function get_search_results(search_input) {  // returns at max 10 r
     console.debug("Received: ", data);
     if (data["Note"]) {  // Call limit reached, RETRY
         console.debug("Retrying...");
-        const res = await fetch(`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${search_input}&apikey=${SECONDARY_API_KEY}`);
+        const res = await fetch(`https://secondaryalphavantage.herokuapp.com/query?function=SYMBOL_SEARCH&keywords=${search_input}`);
         data = await res.json();
     }
     if (!data["bestMatches"]) {
@@ -70,7 +69,7 @@ export async function get_global_quote(symbol_name) {
     console.debug("Received: ", data);
     if (data["Note"]) {  // Call limit reached, RETRY
         console.debug("Retrying...");
-        const res = await fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol_name.trim()}&apikey=${SECONDARY_API_KEY}`);
+        const res = await fetch(`https://secondaryalphavantage.herokuapp.com/query?function=GLOBAL_QUOTE&symbol=${symbol_name.trim()}`);
         data = await res.json();
     }
     if (!data["Global Quote"]) {
