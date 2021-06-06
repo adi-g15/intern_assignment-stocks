@@ -10,9 +10,9 @@ Intentionally Left
 
 ## Screenshots
 
-![]("./ss/see_chart.png")
+![](./ss/see_chart.png)
 
-![]("./ss/compare.png")
+![](./ss/compare.png)
 
 ## Initial Plan
 
@@ -25,19 +25,3 @@ daily, intraday - two option initially, symbol stock name
 
 Compare - Two box, same redox state, use it
 On type, box option changes with setState
-
-# Todo
-
-*[x] Header, and tabs
-
-*[x] Switching
-
-*[ ] API connection
-
-*[ ] Redux connection
-
-*[ ] Graphs
-
-## Note
-
-* Read more on stock ticker, maybe help
