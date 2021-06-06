@@ -19,11 +19,6 @@ export async function get_intraday_data(symbol_name) {    // 5 min by default
         console.debug("Retrying...");
         const res = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol_name/*.substr(symbol_name.indexOf(".")+1)*/}&interval=5min&apikey=${SECONDARY_API_KEY}`);
         data = await res.json();
-        if (data["Note"]) {  // Call limit reached, RETRY LAST TIME
-            console.debug("Retrying Again...");
-            const res = await fetch(`https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol_name/*.substr(symbol_name.indexOf(".")+1)*/}&interval=5min&apikey=${process.env.REACT_APP_TERTIARY_ALPHA_KEY}`);
-            data = await res.json();
-        }
     }
     if (data["Error Message"])
         throw new Error(JSON.stringify(data));
@@ -47,11 +42,6 @@ export async function get_search_results(search_input) {  // returns at max 10 r
         console.debug("Retrying...");
         const res = await fetch(`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${search_input}&apikey=${SECONDARY_API_KEY}`);
         data = await res.json();
-        if (data["Note"]) {  // Call limit reached, RETRY LAST TIME
-            console.debug("Retrying Again...");
-            const res = await fetch(`https://www.alphavantage.co/query?function=SYMBOL_SEARCH&keywords=${search_input}&apikey=${process.env.REACT_APP_TERTIARY_ALPHA_KEY}`);
-            data = await res.json();
-        }
     }
     if (!data["bestMatches"]) {
         throw new Error(JSON.stringify(data));
@@ -82,11 +72,6 @@ export async function get_global_quote(symbol_name) {
         console.debug("Retrying...");
         const res = await fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol_name.trim()}&apikey=${SECONDARY_API_KEY}`);
         data = await res.json();
-        if (data["Note"]) {  // Call limit reached, RETRY LAST TIME
-            console.debug("Retrying Again...");
-            const res = await fetch(`https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol=${symbol_name.trim()}&apikey=${process.env.REACT_APP_TERTIARY_ALPHA_KEY}`);
-            data = await res.json();
-        }
     }
     if (!data["Global Quote"]) {
         throw new Error(JSON.stringify(data));

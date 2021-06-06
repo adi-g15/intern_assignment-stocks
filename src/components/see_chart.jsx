@@ -22,6 +22,11 @@ export default function SeeChart() {
                 const intraday = data["Time Series (5min)"];
 
                 console.debug("Chart data: ", data);
+                if(data["Note"]) {
+                    console.error(data);
+                    alert("API Call Limit Reached. Please try a minute later...");
+                    return;
+                }
                 const new_data = [];
                 for (let key in intraday) {
                     new_data.push([
@@ -44,7 +49,7 @@ export default function SeeChart() {
                 );
             })
             .catch(err => {
-                console.error(err);
+                console.error(Object.keys(err), err);
             });
     }
 

@@ -14,7 +14,7 @@ function DropDown({ setStockSymbol, style = {} }) {
     const [options_array, setOptionsArray] = useState([]);
 
     function handleInputChange(e) {
-        if(!Number.isNaN(e.target.value))  return; // ignore change caused due to selecting an option
+        if(Number.isNaN(e.target.value))  return; // ignore change caused due to selecting an option
 
         setSearch(e.target.value);
         get_search_results(e.target.value)
