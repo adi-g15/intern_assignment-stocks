@@ -1,10 +1,8 @@
 // Since, in this, one page is enough for assignment, so creating a big App function here itself instead of using a 'page/'
 
 import React, {useEffect, useState} from "react";
-import {} from "react-redux";
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import Header from "./components/header";
-import "fontsource-roboto";
 import SeeChartComponent from "./components/see_chart";
 import CompareComponent from "./components/compare";
 
