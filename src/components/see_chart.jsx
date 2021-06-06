@@ -21,7 +21,7 @@ export default function SeeChart() {
 
                 const intraday = data["Time Series (5min)"];
 
-                console.log(data);
+                console.debug("Chart data: ", data);
                 const new_data = [];
                 for (let key in intraday) {
                     new_data.push([
