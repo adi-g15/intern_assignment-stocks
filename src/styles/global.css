@@ -49,6 +49,12 @@ body {
 .compare_table {
     width: 70%;
     min-width: 750px;
+    display: block;
+    box-sizing: border-box;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: 24px;
+    padding-right: 24px;
 }
 
 .MuiOutlinedInput-notchedOutline {
