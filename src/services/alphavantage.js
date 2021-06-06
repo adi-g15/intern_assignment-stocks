@@ -17,6 +17,7 @@ export async function get_intraday_data(symbol_name) {    // 5 min by default
     if (data["Note"]) {  // Call limit reached, RETRY
         console.debug("Retrying...");
         const res = await fetch(`https://secondaryalphavantage.herokuapp.com/query?function=TIME_SERIES_INTRADAY&symbol=${symbol_name/*.substr(symbol_name.indexOf(".")+1)*/}&interval=5min`);
+        // const res = await fetch(`/api/index/query?function=GLOBAL_QUOTE&symbol=${symbol_name.trim()}`);
         data = await res.json();
     }
     if (data["Error Message"])
@@ -40,6 +41,7 @@ export async function get_search_results(search_input) {  // returns at max 10 r
     if (data["Note"]) {  // Call limit reached, RETRY
         console.debug("Retrying...");
         const res = await fetch(`https://secondaryalphavantage.herokuapp.com/query?function=SYMBOL_SEARCH&keywords=${search_input}`);
+        // const res = await fetch(`/api/index/query?function=GLOBAL_QUOTE&symbol=${symbol_name.trim()}`);
         data = await res.json();
     }
     if (!data["bestMatches"]) {
@@ -70,6 +72,7 @@ export async function get_global_quote(symbol_name) {
     if (data["Note"]) {  // Call limit reached, RETRY
         console.debug("Retrying...");
         const res = await fetch(`https://secondaryalphavantage.herokuapp.com/query?function=GLOBAL_QUOTE&symbol=${symbol_name.trim()}`);
+        // const res = await fetch(`/api/index/query?function=GLOBAL_QUOTE&symbol=${symbol_name.trim()}`);
         data = await res.json();
     }
     if (!data["Global Quote"]) {

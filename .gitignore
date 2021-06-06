@@ -1,5 +1,6 @@
 .vscode
 .theia
+build
 
 # Logs
 logs
